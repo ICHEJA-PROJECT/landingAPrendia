@@ -18,7 +18,7 @@ const IntroductionTemplate = () => {
                     src={educator}
                     alt="Educador"
                     className={`w-88 h-[28rem] image-hover rounded-lg cursor-pointer transition-all duration-1000 ease-out ${
-                        isImageInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+                        isImageInView ? 'opacity-100 translate-x-6' : 'opacity-0 -translate-x-10'
                     }`}
                     style={{ transform: isImageInView ? `translateY(${offsetY}px)` : 'translateY(0)' }}
                 />

@@ -13,9 +13,9 @@ const NavLink = () => {
         }
     }
 
-    return <nav className="flex items-center gap-x-6">
-        <LinkPrimary text={"Que es?"} url="#que-es" />
-        <LinkPrimary text={"Caracteristicas"} url="#caracteristicas" />
+    return <nav className="flex items-center gap-x-10">
+        <LinkPrimary text={"¿Qué es?"} url="#que-es" />
+        <LinkPrimary text={"Características"} url="#caracteristicas" />
         <PrimaryButton text={"Me interesa"} onClick={handleMeInteresa} />
     </nav>
 }

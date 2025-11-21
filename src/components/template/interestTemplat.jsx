@@ -19,12 +19,12 @@ const InterestTemplate = () => {
             </h2>
             <p
                 ref={refText}
-                className={`text-4xl w-full text-center mt-4 transition-all duration-1000 ease-out ${
+                className={`text-3xl w-full text-center mt-4 transition-all duration-1000 ease-out ${
                     isTextInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                 }`}
                 style={{ transitionDelay: '200ms' }}
             >
-                Registrate para ponernos en contacto contigo y enviarte más información.
+                Regístrate para ponernos en contacto contigo y enviarte más información.
             </p>
 
             <div
@@ -34,7 +34,7 @@ const InterestTemplate = () => {
                 }`}
                 style={{ transitionDelay: '400ms' }}
             >
-                <ContactForm />
+                <ContactForm  />
             </div>
         </DecoratedLayout>
     </div>

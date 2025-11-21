@@ -27,8 +27,8 @@ const WhatIaTemplate = () => {
                 }`}
                 style={{ transitionDelay: '300ms' }}
             >
-                <p className="text-4xl">
-                    APRENDIA es una aplicación diseñada especialmente para apoyar el proceso de alfabetización a personas sordas en nuestro estado, teniendo como premisa la educación bilingüe bicultural, centrándonos en la enseñanza del español escrito como segunda lengua.
+                <p className="text-4xl text-justify">
+                    APRENDIA es una aplicación diseñada especialmente para apoyar en el proceso de alfabetización a personas sordas en el Estado de Chiapas, teniendo como premisa la educación bilingüe bicultural, centrándose en la enseñanza del español escrito como segunda lengua.
                 </p>
 
                 <img src={logo} alt="" className="h-96" />

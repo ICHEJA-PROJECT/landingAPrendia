@@ -18,7 +18,7 @@ const ContentCard = ({ urlImage, titulo, parrafo, alineacion = "imagen-texto", d
 
       <article className="flex flex-col gap-y-6 flex-1 ">
         <h3 className="text-4xl font-extrabold text-green-ia leading-tight">{titulo}</h3>
-        <p className="text-2xl text-gray-700 leading-relaxed">{parrafo}</p>
+        <p className="text-2xl text-gray-700 leading-relaxed text-justify">{parrafo}</p>
       </article>
     </section>
   )

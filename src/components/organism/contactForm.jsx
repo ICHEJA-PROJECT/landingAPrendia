@@ -8,43 +8,40 @@ const ContactForm = () => {
       {/* Datos de la persona de contacto */}
       <div className="w-full">
         <h3 className="text-2xl font-bold text-pink-ia mb-4">Datos de la persona de contacto</h3>
-
+        <Select
+          label="Comunidad a la que pertenece el beneficiario"
+          name="comunidad"
+          options={["CAM"]}
+          required
+          placeholder="CAM"
+        />
         <div className="grid grid-cols-2 gap-4">
           {/* Comunidad - ocupa 1 columna */}
-          <Select
-            label="Comunidad a la que pertenece el beneficiario"
-            name="comunidad"
-            options={["CAM"]}
-            required
-            placeholder="CAM"
-          />
+
           <Input
             label="Nombre(s)"
             name="nombre"
             placeholder="Víctor"
             required
           />
-
           <Input
             label="Apellidos"
             name="apellidos"
             placeholder="Perez Constantino"
             required
           />
-
-          <Input
-            label="Número de teléfono"
-            name="telefono"
-            type="tel"
-            placeholder="9637894562"
-            required
-          />
-
           <Input
             label="Email"
             name="email"
             type="email"
             placeholder="villalobos@gmail.com"
+            required
+          />
+             <Input
+            label="Número de teléfono"
+            name="telefono"
+            type="tel"
+            placeholder="9637894562"
             required
           />
 
@@ -54,6 +51,13 @@ const ContactForm = () => {
             placeholder="Séptima Oriente"
             required
           />
+
+
+
+
+
+
+
 
           <Input
             label="Número exterior"
@@ -76,19 +80,21 @@ const ContactForm = () => {
             required
           />
 
-          <Input
+          <Select
             label="Municipio"
-            name="municipio"
-            placeholder="Tuxtla Gutiérrez"
+            name="Municipio"
+            options={[]}
             required
           />
 
-          <Input
+            <Select
             label="Estado"
-            name="estado"
-            placeholder="Chiapas"
+            name="Estado"
+            options={["Chiapas"]}
             required
           />
+       
+        
 
           {/* Por qué me interesa - ocupa 2 columnas */}
           <div className="col-span-2">
