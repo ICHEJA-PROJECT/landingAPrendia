@@ -1,0 +1,39 @@
+import DecoratedLayout from "../../common/iu/components/decoratedLayout";
+import logo from "../../../public/img/logo_xl.png"
+import useInView from "../../hooks/useInView"
+
+const WhatIaTemplate = () => {
+    const [ref, isInView] = useInView()
+    const [refTitle, isTitleInView] = useInView()
+    const [refContent, isContentInView] = useInView()
+
+    return <div ref={ref} className={`transition-all duration-1500 ease-in-out ${isInView ? 'opacity-100' : 'opacity-0'}`}>
+        <DecoratedLayout>
+            <h2
+                ref={refTitle}
+                className={`text-5xl w-full text-pink-ia font-extrabold text-center flex flex-wrap justify-center mb-12 transition-all duration-1000 ease-out ${
+                    isTitleInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
+                }`}
+            >
+                ¿Qué es APREND
+                <span className="text-green-ia">IA</span>
+                ?
+            </h2>
+
+            <section
+                ref={refContent}
+                className={`flex flex-row items-center gap-x-20 transition-all duration-1000 ease-out ${
+                    isContentInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: '300ms' }}
+            >
+                <p className="text-4xl">
+                    APRENDIA es una aplicación diseñada especialmente para apoyar el proceso de alfabetización a personas sordas en nuestro estado, teniendo como premisa la educación bilingüe bicultural, centrándonos en la enseñanza del español escrito como segunda lengua.
+                </p>
+
+                <img src={logo} alt="" className="h-96" />
+            </section>
+        </DecoratedLayout>
+    </div>
+}
+export default WhatIaTemplate;
