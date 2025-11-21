@@ -8,7 +8,7 @@ const WhatIaTemplate = () => {
     const [refContent, isContentInView] = useInView()
 
     return <div ref={ref} className={`transition-all duration-1500 ease-in-out ${isInView ? 'opacity-100' : 'opacity-0'}`}>
-        <DecoratedLayout>
+       
             <h2
                 ref={refTitle}
                 className={`text-5xl w-full text-pink-ia font-extrabold text-center flex flex-wrap justify-center mb-12 transition-all duration-1000 ease-out ${
@@ -33,7 +33,7 @@ const WhatIaTemplate = () => {
 
                 <img src={logo} alt="" className="h-96" />
             </section>
-        </DecoratedLayout>
+      
     </div>
 }
 export default WhatIaTemplate;

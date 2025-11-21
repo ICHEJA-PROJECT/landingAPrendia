@@ -19,7 +19,7 @@ const InterestTemplate = () => {
             </h2>
             <p
                 ref={refText}
-                className={`text-3xl w-full text-center mt-4 transition-all duration-1000 ease-out ${
+                className={`text-2xl w-full text-center mt-4 transition-all duration-1000 ease-out ${
                     isTextInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                 }`}
                 style={{ transitionDelay: '200ms' }}
@@ -29,7 +29,7 @@ const InterestTemplate = () => {
 
             <div
                 ref={refForm}
-                className={`transition-all duration-1000 ease-out ${
+                className={`transition-all duration-1000 ease-out w-full ${
                     isFormInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
                 style={{ transitionDelay: '400ms' }}

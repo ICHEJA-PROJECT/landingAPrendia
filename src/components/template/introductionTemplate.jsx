@@ -2,7 +2,7 @@ import educator from "../../../public/img/educador.png"
 import TitlePrimary from "../atoms/titlePrimary"
 import useParallax from "../../hooks/useParallax"
 import useInView from "../../hooks/useInView"
-
+import DecoratedLayout from "../../common/iu/components/decoratedLayout"
 const IntroductionTemplate = () => {
     const offsetY = useParallax(0.3)
     const [refImage, isImageInView] = useInView()
@@ -10,6 +10,7 @@ const IntroductionTemplate = () => {
     const [refTitle, isTitleInView] = useInView()
 
     return (
+        <DecoratedLayout>
         <section className="flex flex-col items-center justify-start pt-8 min-h-[85vh] w-full">
             <div className="flex justify-between items-center gap-x-36 w-full">
                 
@@ -17,10 +18,10 @@ const IntroductionTemplate = () => {
                     ref={refImage}
                     src={educator}
                     alt="Educador"
-                    className={`w-88 h-[28rem] image-hover rounded-lg cursor-pointer transition-all duration-1000 ease-out ${
-                        isImageInView ? 'opacity-100 translate-x-6' : 'opacity-0 -translate-x-10'
+                    className={`w-88 h-[28rem] image-hover rounded-lg cursor-pointer
+                       
                     }`}
-                    style={{ transform: isImageInView ? `translateY(${offsetY}px)` : 'translateY(0)' }}
+                   
                 />
 
                 <article className="flex flex-col w-full items-center gap-y-24">
@@ -46,6 +47,7 @@ const IntroductionTemplate = () => {
                 </article>
             </div>
         </section>
+        </DecoratedLayout>
     )
 }
 

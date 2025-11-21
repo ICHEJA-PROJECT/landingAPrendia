@@ -12,9 +12,12 @@ function App() {
     <>
       <Header />
       <main className="w-full px-42 pt-36">
-        <IntroductionTemplate />
-        <div id="que-es">
+        <div id="que-es" className="pt-10">
           <WhatIaTemplate />
+        </div>
+
+        <div className="mt-16">
+          <IntroductionTemplate />
         </div>
         <div id="caracteristicas">
           <FeatureTemplate />
@@ -22,9 +25,9 @@ function App() {
         <div id="me-interesa">
           <InterestTemplate />
         </div>
-  
+
       </main>
-            <Footer/>
+      <Footer />
     </>
   )
 }

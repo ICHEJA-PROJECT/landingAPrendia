@@ -4,7 +4,7 @@ import ContentCard from "../molecule/contentCard"
 import feat1 from "../../../public/img/feat-1.png"
 import feat2 from "../../../public/img/feat-2.png"
 import feat3 from "../../../public/img/feat-3.png"
-import git_feat from "../../../public/img/exercise_interactive.gif"
+
 const FeatureTemplate = () => {
     const [ref, isInView] = useInView()
 
@@ -16,7 +16,7 @@ Características
             </h2>
             <div className="w-full max-w-6xl px-8">
                 <ContentCard
-                    urlImage={git_feat}
+                    urlImage={feat1}
                     titulo="Ejercicios interactivos"
                     parrafo="Los ejercicios interactivos de la aplicación permiten al usuario aprender de forma dinámica, convirtiendo las actividades tradicionales en experiencias digitales que facilitan la comprensión."
                     alineacion="imagen-texto"
