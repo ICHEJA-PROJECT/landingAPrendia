@@ -1,5 +1,6 @@
 import Header from "./components/organism/headerOrganism"
 import FeatureTemplate from "./components/template/featureTemplate"
+import Footer from "./components/template/footerTemplat"
 import InterestTemplate from "./components/template/interestTemplat"
 import IntroductionTemplate from "./components/template/introductionTemplate"
 import WhatIaTemplate from "./components/template/whatIaTemplate"
@@ -18,8 +19,12 @@ function App() {
         <div id="caracteristicas">
           <FeatureTemplate />
         </div>
-        <InterestTemplate />
+        <div id="me-interesa">
+          <InterestTemplate />
+        </div>
+  
       </main>
+            <Footer/>
     </>
   )
 }
