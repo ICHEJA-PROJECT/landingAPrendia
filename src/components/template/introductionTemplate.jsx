@@ -84,7 +84,7 @@ const IntroductionTemplate = () => {
                     <PrimaryButton
                         text="Me interesa"
                         onClick={handleMeInteresa}
-                        className="mx-auto"
+                        className="mx-auto mt-7"
                     />
 
                 </article>
