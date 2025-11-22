@@ -12,7 +12,7 @@ const InterestTemplate = () => {
             <DecoratedLayout>
                 <h2
                     ref={refTitle}
-                    className={`text-3xl md:text-5xl w-full text-pink-ia font-extrabold text-center flex flex-wrap justify-center mb-4 transition-all duration-1000 ease-out ${
+                    className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl w-full text-pink-ia font-extrabold text-center flex flex-wrap justify-center mb-4 transition-all duration-1000 ease-out ${
                         isTitleInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
                     }`}
                 >
@@ -20,7 +20,7 @@ const InterestTemplate = () => {
                 </h2>
                 <p
                     ref={refText}
-                    className={`text-base md:text-2xl w-full text-center mt-4 px-2 transition-all duration-1000 ease-out ${
+                    className={`text-sm sm:text-base md:text-xl lg:text-2xl w-full text-center mt-4 px-2 transition-all duration-1000 ease-out ${
                         isTextInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                     }`}
                     style={{ transitionDelay: '200ms' }}

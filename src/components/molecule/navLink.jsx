@@ -1,17 +1,8 @@
-import PrimaryButton from "../atoms/button"
+
 import LinkPrimary from "../atoms/LinkPrimary"
 
 const NavLink = ({ isMobile = false, onLinkClick }) => {
-    const handleMeInteresa = () => {
-        const element = document.getElementById('me-interesa')
-        if (element) {
-            element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            })
-        }
-        if (onLinkClick) onLinkClick()
-    }
+   
 
     const handleLinkClick = () => {
         if (onLinkClick) onLinkClick()
@@ -34,12 +25,7 @@ const NavLink = ({ isMobile = false, onLinkClick }) => {
                 >
                     Características
                 </a>
-                <button
-                    onClick={handleMeInteresa}
-                    className="bg-pink-ia text-white py-3 px-6 rounded-lg font-medium text-lg w-full max-w-xs"
-                >
-                    Me interesa
-                </button>
+               
             </nav>
         )
     }
@@ -48,7 +34,8 @@ const NavLink = ({ isMobile = false, onLinkClick }) => {
         <nav className="flex items-center gap-x-10">
             <LinkPrimary text={"¿Qué es?"} url="#que-es" />
             <LinkPrimary text={"Características"} url="#caracteristicas" />
-            <PrimaryButton text={"Me interesa"} onClick={handleMeInteresa} />
+            <LinkPrimary text={"Me interesa"} url="#me-interesa" />
+        
         </nav>
     )
 }

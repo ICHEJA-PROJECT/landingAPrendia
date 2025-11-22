@@ -11,7 +11,7 @@ const FeatureTemplate = () => {
     return (
         <div ref={ref} className={`transition-all duration-1500 ease-in-out ${isInView ? 'opacity-100' : 'opacity-0'}`}>
             <DecoratedLayout>
-                <h2 className="text-3xl md:text-5xl w-full text-pink-ia font-extrabold text-center flex flex-wrap justify-center mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl w-full text-pink-ia font-extrabold text-center flex flex-wrap justify-center mb-4">
                     Características
                 </h2>
                 <div className="w-full max-w-6xl px-2 md:px-8">
