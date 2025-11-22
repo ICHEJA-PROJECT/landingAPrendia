@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/core/:path*",
-      "destination": "$VITE_API_CORE/api/:path*"
+      "destination": "http://20.245.212.209:3000/api/:path*"
     },
     {
       "source": "/api/form/:path*",
-      "destination": "$VITE_API_SERVICES_FORM/:path*"
+      "destination": "http://localhost:3001/:path*"
     }
   ]
 }
