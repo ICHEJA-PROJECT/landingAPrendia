@@ -81,7 +81,7 @@ const ContactForm = () => {
           name="comunidad"
           options={["CAM", "USAER", "PARTICULAR", "ADAS", "ASODECH", "OTROS"]}
           required
-          placeholder="CAM"
+          placeholder="Seleccionar comunidad"
           className="w-full"
           value={formData.comunidad}
           onChange={handleChange}

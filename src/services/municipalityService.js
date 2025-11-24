@@ -1,8 +1,8 @@
-import envConfig from '../core/env/enviromentConfig'
+import environment from '../config/environment'
 
 export const getMunicipalitiesByState = async (stateId) => {
   try {
-    const response = await fetch(`${envConfig.apiCore}/municipalities/state/${stateId}`)
+    const response = await fetch(`${environment.apiCore}/municipalities/state/${stateId}`)
 
     if (!response.ok) {
       throw new Error('Error al obtener municipios')

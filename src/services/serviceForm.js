@@ -1,4 +1,4 @@
-import envConfig from '../core/env/enviromentConfig'
+import environment from '../config/environment'
 
 export const sendFormData = async (formData) => {
   try {
@@ -16,7 +16,7 @@ export const sendFormData = async (formData) => {
       porQueMeInteresa: formData.motivo
     }
 
-    const response = await fetch(`${envConfig.apiForm}/forms`, {
+    const response = await fetch(`${environment.apiForm}/forms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
