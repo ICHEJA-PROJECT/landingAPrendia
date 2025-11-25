@@ -96,7 +96,7 @@ const IntroductionTemplate = () => {
 
                 {/* IMAGE */}
                 <motion.div
-                    className="w-full sm:w-[45%] md:w-[45%] lg:w-[40%] flex justify-center items-center fixed sm:relative top-0 left-0 right-0 sm:top-auto sm:left-auto sm:right-auto pointer-events-none sm:pointer-events-auto"
+                    className="w-full sm:w-[45%] md:w-[45%] lg:w-[40%] flex justify-center items-center sm:relative pointer-events-none sm:pointer-events-auto"
                     initial={{ opacity: 0, x: 40, scale: 0.9, filter: "blur(4px)" }}
                     animate={isImageInView ? { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" } : { opacity: 0, x: 40, scale: 0.9, filter: "blur(4px)" }}
                     transition={{ ...springGentle, delay: 0.25 }}
@@ -104,6 +104,7 @@ const IntroductionTemplate = () => {
                         scale: parallaxValues.imageScale,
                         opacity: parallaxValues.imageOpacity,
                         y: parallaxValues.imageY,
+                        x: parallaxValues.imageX,
                     }}
                 >
                     <motion.img

@@ -7,6 +7,7 @@ export const useScrollParallax = () => {
         imageOpacity: 1,
         textOpacity: 1,
         imageY: 0,
+        imageX: 0,
     })
 
     useEffect(() => {
@@ -19,22 +20,30 @@ export const useScrollParallax = () => {
             const elementHeight = rect.height
             const windowHeight = window.innerHeight
 
-            // Calcular progreso del scroll (0 = arriba, 1 = abajo)
-            const progress = Math.max(0, Math.min(1, (windowHeight - elementTop) / (windowHeight + elementHeight)))
+            // Calcular progreso: cuándo la sección entra en viewport y sale
+            // Cuando elementTop === windowHeight (entra desde abajo) = progress 0
+            // Cuando elementTop === -elementHeight (sale por arriba) = progress 1
+            const totalDistance = windowHeight + elementHeight
+            const progress = Math.max(0, Math.min(1, (windowHeight - elementTop) / totalDistance))
 
-            // Efectos progresivos
-            const imageScale = 1 + progress * 0.3 // Crece hasta 1.3x
-            const imageOpacity = Math.max(0, 1 - progress * 0.5) // Se desvanece gradualmente
-            const textOpacity = Math.max(0, 1 - progress * 0.8) // El texto se desvanece más rápido
-            const imageY = progress * -40 // Se mueve hacia arriba suavemente
+            // Efectos progresivos más agresivos
+            const imageScale = 1 + progress * 0.5 // Crece hasta 1.5x
+            const imageOpacity = Math.max(0, 1 - progress * 1.2) // Se desvanece más rápido
+            const textOpacity = Math.max(0, 1 - progress * 1.5) // El texto se desvanece muy rápido
+            const imageY = progress * -60 // Se mueve hacia arriba más
+            const imageX = Math.abs(progress - 0.5) * 20 // Se centra (hacia el centro de pantalla)
 
             setParallaxValues({
                 imageScale,
                 imageOpacity,
                 textOpacity,
                 imageY,
+                imageX,
             })
         }
+
+        // Llamar una vez al montar para evitar saltos
+        handleScroll()
 
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
