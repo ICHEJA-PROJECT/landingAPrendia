@@ -27,12 +27,30 @@ export const loginUser = async (username, password) => {
 
     if (!response.ok) {
       let errorMessage = 'Error al iniciar sesión';
+
+      // Try to parse error response
       try {
-        const error = await response.json();
-        errorMessage = error.message || error.error || `Error ${response.status}`;
-      } catch {
-        errorMessage = `Error ${response.status}: ${response.statusText}`;
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const error = await response.json();
+          errorMessage = error.message || error.error || errorMessage;
+        } else {
+          // Server returned HTML or other non-JSON response
+          const text = await response.text();
+          console.error('Server response:', text.substring(0, 100));
+        }
+      } catch (e) {
+        // Error parsing response
+        console.error('Error parsing response:', e);
       }
+
+      // Provide user-friendly error messages based on status code
+      if (response.status === 401 || response.status === 400) {
+        errorMessage = 'Usuario o contraseña incorrectos';
+      } else if (response.status === 500) {
+        errorMessage = 'Error en el servidor. Intenta más tarde';
+      }
+
       throw new Error(errorMessage);
     }
 
