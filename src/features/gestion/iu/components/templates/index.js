@@ -1,1 +1,1 @@
-// Placeholder for gestion templates
+export { UsersManagementTemplate } from './UsersManagementTemplate';

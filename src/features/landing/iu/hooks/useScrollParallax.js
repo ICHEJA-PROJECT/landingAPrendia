@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { useMotionValue, useTransform } from 'framer-motion'
 
 export const useScrollParallax = () => {
     const ref = useRef(null)
-    const [parallaxValues, setParallaxValues] = useState({
-        imageScale: 1,
-        imageOpacity: 1,
-        textOpacity: 1,
-        imageY: 0,
-        imageX: 0,
-    })
+
+    // Motion values para animaciones suaves
+    const progress = useMotionValue(0)
+    const imageScale = useTransform(progress, [0, 1], [1, 1.5])
+    const imageOpacity = useTransform(progress, [0, 1], [1, 0])
+    const textOpacity = useTransform(progress, [0, 1], [1, 0])
+    const imageY = useTransform(progress, [0, 1], [0, -60])
+    const imageX = useTransform(progress, [0, 0.5, 1], [10, 0, 10])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,33 +23,28 @@ export const useScrollParallax = () => {
             const windowHeight = window.innerHeight
 
             // Calcular progreso: cuándo la sección entra en viewport y sale
-            // Cuando elementTop === windowHeight (entra desde abajo) = progress 0
-            // Cuando elementTop === -elementHeight (sale por arriba) = progress 1
             const totalDistance = windowHeight + elementHeight
-            const progress = Math.max(0, Math.min(1, (windowHeight - elementTop) / totalDistance))
+            const calculatedProgress = Math.max(0, Math.min(1, (windowHeight - elementTop) / totalDistance))
 
-            // Efectos progresivos más agresivos
-            const imageScale = 1 + progress * 0.5 // Crece hasta 1.5x
-            const imageOpacity = Math.max(0, 1 - progress * 1.2) // Se desvanece más rápido
-            const textOpacity = Math.max(0, 1 - progress * 1.5) // El texto se desvanece muy rápido
-            const imageY = progress * -60 // Se mueve hacia arriba más
-            const imageX = Math.abs(progress - 0.5) * 20 // Se centra (hacia el centro de pantalla)
-
-            setParallaxValues({
-                imageScale,
-                imageOpacity,
-                textOpacity,
-                imageY,
-                imageX,
-            })
+            // Actualizar el motion value
+            progress.set(calculatedProgress)
         }
 
-        // Llamar una vez al montar para evitar saltos
+        // Llamar una vez al montar
         handleScroll()
 
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+    }, [progress])
 
-    return { ref, parallaxValues }
+    return {
+        ref,
+        parallaxValues: {
+            imageScale,
+            imageOpacity,
+            textOpacity,
+            imageY,
+            imageX,
+        }
+    }
 }

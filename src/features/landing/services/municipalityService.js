@@ -1,8 +1,11 @@
-import environment from '../../../common/iu/environment.js'
-
 export const getMunicipalitiesByState = async (stateId) => {
   try {
-    const response = await fetch(`${environment.apiCore}/municipalities/state/${stateId}`)
+    // Use proxy route during development, direct URL for production
+    const apiUrl = process.env.NODE_ENV === 'development'
+      ? `/api/core/municipalities/state/${stateId}`
+      : `${import.meta.env.VITE_API_CORE}/municipalities/state/${stateId}`
+
+    const response = await fetch(apiUrl)
 
     if (!response.ok) {
       throw new Error('Error al obtener municipios')
@@ -14,7 +17,7 @@ export const getMunicipalitiesByState = async (stateId) => {
 
     return municipalityNames
   } catch (error) {
-    console.error("Oh no ocurrio un problema con el internet")
+    console.error("Error al obtener municipios:", error)
     return []
   }
 }

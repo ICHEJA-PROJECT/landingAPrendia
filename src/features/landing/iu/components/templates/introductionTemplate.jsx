@@ -3,14 +3,12 @@ import { TitlePrimary, Button } from "../../../../../common/iu/components"
 import { useInView } from "../../../../../common/iu/hooks"
 import { motion } from "framer-motion"
 import { useSpringAnimation } from "../../hooks/useSpringAnimation"
-import { useScrollParallax } from "../../hooks/useScrollParallax"
 
 const IntroductionTemplate = () => {
     const [refImage, isImageInView] = useInView()
     const [refText, isTextInView] = useInView()
     const [refTitle, isTitleInView] = useInView()
     const springGentle = useSpringAnimation('gentle')
-    const { ref: parallaxRef, parallaxValues } = useScrollParallax()
 
     const handleMeInteresa = () => {
         const element = document.getElementById('me-interesa')
@@ -24,7 +22,6 @@ const IntroductionTemplate = () => {
 
     return (
         <section
-            ref={parallaxRef}
             className="
                 flex flex-col items-center justify-center
                 pt-4 sm:pt-2 md:pt-0
@@ -39,9 +36,6 @@ const IntroductionTemplate = () => {
                     gap-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-12
                     w-full max-w-7xl mx-auto px-4
                 "
-                style={{
-                    opacity: parallaxValues.textOpacity
-                }}
             >
 
                 {/* TEXT SECTION */}
@@ -96,37 +90,28 @@ const IntroductionTemplate = () => {
 
                 {/* IMAGE */}
                 <motion.div
-                    className="w-full sm:w-[45%] md:w-[45%] lg:w-[40%] flex justify-center items-center sm:relative pointer-events-none sm:pointer-events-auto"
+                    ref={refImage}
+                    className="w-full sm:w-[45%] md:w-[45%] lg:w-[40%] flex justify-center items-center"
                     initial={{ opacity: 0, x: 40, scale: 0.9, filter: "blur(4px)" }}
                     animate={isImageInView ? { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" } : { opacity: 0, x: 40, scale: 0.9, filter: "blur(4px)" }}
                     transition={{ ...springGentle, delay: 0.25 }}
                 >
-                    <motion.div
-                        style={{
-                            scale: parallaxValues.imageScale,
-                            opacity: parallaxValues.imageOpacity,
-                            y: parallaxValues.imageY,
-                            x: parallaxValues.imageX,
-                        }}
-                    >
-                        <motion.img
-                            ref={refImage}
-                            src={alfi}
-                            alt="alfi"
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ ...springGentle, duration: 0.4 }}
-                            className="
-                                image-3d-hover
-                                w-56 h-auto
-                                sm:w-auto sm:h-64
-                                md:w-auto md:h-72
-                                lg:w-auto lg:h-[80vh]
-                                xl:h-[85vh]
-                                rounded-lg cursor-pointer
-                                object-contain
-                            "
-                        />
-                    </motion.div>
+                    <motion.img
+                        src={alfi}
+                        alt="alfi"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ ...springGentle, duration: 0.4 }}
+                        className="
+                            image-3d-hover
+                            w-56 h-auto
+                            sm:w-auto sm:h-64
+                            md:w-auto md:h-72
+                            lg:w-auto lg:h-[80vh]
+                            xl:h-[85vh]
+                            rounded-lg cursor-pointer
+                            object-contain
+                        "
+                    />
                 </motion.div>
 
             </motion.div>
