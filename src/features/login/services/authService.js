@@ -4,9 +4,9 @@
 const getApiUrl = (endpoint) => {
   // Use proxy during development, direct URL for production
   if (import.meta.env.MODE === 'development') {
-    return `/api/core${endpoint}`;
+    return `/api/form${endpoint}`;
   }
-  return `${import.meta.env.VITE_API_CORE}${endpoint}`;
+  return `${import.meta.env.VITE_API_SERVICES_FORM}${endpoint}`;
 };
 
 /**
@@ -14,7 +14,7 @@ const getApiUrl = (endpoint) => {
  */
 export const loginUser = async (username, password) => {
   try {
-    const response = await fetch(getApiUrl('/auth/login'), {
+    const response = await fetch(getApiUrl('/login'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -26,8 +26,14 @@ export const loginUser = async (username, password) => {
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Error al iniciar sesión');
+      let errorMessage = 'Error al iniciar sesión';
+      try {
+        const error = await response.json();
+        errorMessage = error.message || error.error || `Error ${response.status}`;
+      } catch {
+        errorMessage = `Error ${response.status}: ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
