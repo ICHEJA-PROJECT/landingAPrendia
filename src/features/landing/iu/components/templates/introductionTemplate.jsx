@@ -101,8 +101,8 @@ const IntroductionTemplate = () => {
                     animate={isImageInView ? { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" } : { opacity: 0, x: 40, scale: 0.9, filter: "blur(4px)" }}
                     transition={{ ...springGentle, delay: 0.25 }}
                     style={{
-                        scale: parallaxValues.imageScale,
-                        opacity: parallaxValues.imageOpacity,
+                        scale: isImageInView ? parallaxValues.imageScale : 0.9,
+                        opacity: isImageInView ? parallaxValues.imageOpacity : 0,
                         y: parallaxValues.imageY,
                         x: parallaxValues.imageX,
                     }}
