@@ -20,7 +20,7 @@ export const UsersTable = ({
     'Comunidad perteneciente',
     'Interés',
     'Fecha de registro',
-    'Acciones'
+    'Atendidos'
   ];
   if (isLoading) {
     return (

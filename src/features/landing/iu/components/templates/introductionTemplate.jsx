@@ -24,8 +24,8 @@ const IntroductionTemplate = () => {
         <section
             className="
                 flex flex-col items-center justify-center
-                pt-4 sm:pt-2 md:pt-0
-                min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh] lg:min-h-[60vh]
+                py-2 sm:py-4 md:py-8
+                min-h-fit
                 w-full
             ">
 
@@ -33,8 +33,8 @@ const IntroductionTemplate = () => {
                 className="
                     flex flex-col-reverse sm:flex-row
                     justify-center items-center
-                    gap-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-12
-                    w-full max-w-7xl mx-auto px-4
+                    gap-1 sm:gap-x-4 md:gap-x-8 lg:gap-x-12
+                    w-full max-w-7xl mx-auto px-3 sm:px-4
                 "
             >
 
@@ -42,7 +42,7 @@ const IntroductionTemplate = () => {
                 <article className="
                     flex flex-col w-full sm:w-[55%] md:w-[55%] lg:w-[60%]
                     items-center justify-center
-                    gap-y-3 sm:gap-y-4 md:gap-y-5 lg:gap-y-6
+                    gap-y-1 sm:gap-y-3 md:gap-y-5 lg:gap-y-6
                 ">
 
                     {/* TITLE */}
@@ -82,7 +82,7 @@ const IntroductionTemplate = () => {
                         <Button
                             text="Me interesa"
                             onClick={handleMeInteresa}
-                            className="mx-auto mt-7"
+                            className="mx-auto mt-3 sm:mt-7"
                         />
                     </motion.div>
 

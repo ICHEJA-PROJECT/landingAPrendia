@@ -24,7 +24,12 @@ export const getMunicipalitiesByState = async (stateId) => {
 
     const municipalityNames = data.data.map(municipality => municipality.nombre)
 
-    return municipalityNames
+    // Sort alphabetically A-Z using localeCompare for proper Spanish character handling
+    const sortedMunicipalities = municipalityNames.sort((a, b) =>
+      a.localeCompare(b, 'es', { sensitivity: 'base' })
+    )
+
+    return sortedMunicipalities
   } catch (error) {
     console.error("Error al obtener municipios:", error)
     return []

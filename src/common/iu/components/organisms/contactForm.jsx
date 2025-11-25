@@ -46,6 +46,16 @@ const ContactForm = () => {
     setSubmitting(true)
     setSubmitStatus(null)
 
+    // Validar que al menos email o teléfono esté lleno
+    if (!formData.email && !formData.telefono) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Debe proporcionar al menos un email o número de teléfono para contactarlo.'
+      })
+      setSubmitting(false)
+      return
+    }
+
     const result = await sendFormData(formData)
 
     if (result.success) {
@@ -107,7 +117,7 @@ const ContactForm = () => {
           <Input
             label="Nombre(s)"
             name="nombre"
-            placeholder="Víctor"
+            placeholder="Juan"
             required
             className="w-full"
             value={formData.nombre}
@@ -117,7 +127,7 @@ const ContactForm = () => {
           <Input
             label="Apellidos"
             name="apellidos"
-            placeholder="Perez Constantino"
+            placeholder="Hernandez Lopez"
             required
             className="w-full"
             value={formData.apellidos}
@@ -125,21 +135,20 @@ const ContactForm = () => {
           />
 
           <Input
-            label="Email"
+            label="Email *"
             name="email"
             type="email"
-            placeholder="villalobos@gmail.com"
-            required
+            placeholder="ejemplo@gmail.com"
             className="w-full"
             value={formData.email}
             onChange={handleChange}
           />
 
           <Input
-            label="Número de teléfono"
+            label="Número de teléfono *"
             name="telefono"
             type="tel"
-            placeholder="9637894562"
+            placeholder="961 123 4567"
             className="w-full"
             value={formData.telefono}
             onChange={handleChange}
@@ -170,7 +179,7 @@ const ContactForm = () => {
             <TextArea
               label="Por qué me interesa"
               name="motivo"
-              placeholder="Hola estoy intersado en la aplicación APRENDIA y quisiera que me contacten para recibir más información."
+              placeholder="Hola estoy interesado en la aplicación APRENDIA  y quisiera que me contacten para recibir más información. "
               required
               rows={4}
               className="w-full"

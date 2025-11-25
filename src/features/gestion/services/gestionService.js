@@ -10,7 +10,7 @@ const getApiUrl = (endpoint) => {
 };
 
 export const getInteresados = async (params = {}) => {
-  const { page = 1, search = '' } = params;
+  const { page = 1, search = '', community = '', municipality = '' } = params;
 
   try {
     const token = localStorage.getItem('token');
@@ -40,21 +40,51 @@ export const getInteresados = async (params = {}) => {
       phone: form.numeroTelefono || '',
       city: form.municipio || '',
       avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${form.email}`,
-      community: form.colonia || '',
+      community: form.comunidadPerteneciente || form.colonia || '',
       registrationDate: form.createdAt ? new Date(form.createdAt).toLocaleDateString() : '',
       postalCode: form.codigoPostal || '',
       interest: form.porQueMeInteresa || ''
     }));
 
-    // Simple client-side filtering for search
+    // Apply filters
     let filtered = mappedForms;
+
+    // Filter by search
     if (search) {
       const searchLower = search.toLowerCase();
-      filtered = mappedForms.filter(user =>
+      filtered = filtered.filter(user =>
         user.name.toLowerCase().includes(searchLower) ||
         user.email.toLowerCase().includes(searchLower) ||
         user.id.toLowerCase().includes(searchLower)
       );
+    }
+
+    // Filter by community
+    if (community) {
+      filtered = filtered.filter(user =>
+        user.community.toLowerCase() === community.toLowerCase()
+      );
+    }
+
+    // Filter by municipality
+    if (municipality) {
+      filtered = filtered.filter(user => {
+        const userCity = (user.city || '').trim();
+        const searchMunicipality = municipality.trim();
+
+        // Normalize strings to remove accents and special characters
+        const normalizeString = (str) => {
+          return str
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, ''); // Remove accents
+        };
+
+        const normalizedUserCity = normalizeString(userCity);
+        const normalizedSearch = normalizeString(searchMunicipality);
+
+        return normalizedUserCity.includes(normalizedSearch);
+      });
     }
 
     // Simple pagination

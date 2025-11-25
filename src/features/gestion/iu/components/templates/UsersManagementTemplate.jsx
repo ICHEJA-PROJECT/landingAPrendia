@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Header, UsersTable } from '../organisms';
+import { Sidebar, Header, UsersTable, ModalGestion } from '../organisms';
 import { SearchBar, Pagination } from '../molecules';
 
 export const UsersManagementTemplate = ({
@@ -13,7 +13,12 @@ export const UsersManagementTemplate = ({
   searchValue = '',
   onSearchChange,
   isFilterActive = false,
-  onFilterClick
+  onFilterClick,
+  isModalOpen = false,
+  onModalClose,
+  onApplyFilters,
+  onClearFilters,
+  currentFilters = {}
 }) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const resultsPerPage = 7;
@@ -75,6 +80,15 @@ export const UsersManagementTemplate = ({
           </div>
         </main>
       </div>
+
+      {/* Filter Modal */}
+      <ModalGestion
+        isOpen={isModalOpen}
+        onClose={onModalClose}
+        onApplyFilters={onApplyFilters}
+        onClearFilters={onClearFilters}
+        initialFilters={currentFilters}
+      />
     </div>
   );
 };

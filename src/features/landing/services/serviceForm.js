@@ -11,6 +11,11 @@ const getApiUrl = (endpoint) => {
 
 export const sendFormData = async (formData) => {
   try {
+    // Determine the community value - use otraComunidad if comunidad is "OTROS"
+    const comunidadValue = formData.comunidad === "OTROS"
+      ? formData.otraComunidad
+      : formData.comunidad;
+
     const payload = {
       nombre: formData.nombre,
       apellidos: formData.apellidos,
@@ -22,6 +27,7 @@ export const sendFormData = async (formData) => {
       colonia: "Sin especificar",
       municipio: formData.municipio,
       estado: formData.estado,
+      comunidadPerteneciente: comunidadValue,
       porQueMeInteresa: formData.motivo
     }
 

@@ -2,8 +2,13 @@ import { useState, useCallback } from 'react';
 
 export const useFilters = (initialFilters = {}) => {
   const [searchValue, setSearchValue] = useState('');
-  const [filters, setFilters] = useState(initialFilters);
+  const [filters, setFilters] = useState({
+    community: '',
+    municipality: '',
+    ...initialFilters
+  });
   const [isFilterActive, setIsFilterActive] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearchChange = useCallback((value) => {
     setSearchValue(value);
@@ -13,6 +18,10 @@ export const useFilters = (initialFilters = {}) => {
     setIsFilterActive((prev) => !prev);
   }, []);
 
+  const handleModalToggle = useCallback(() => {
+    setIsModalOpen((prev) => !prev);
+  }, []);
+
   const handleFilterChange = useCallback((filterName, value) => {
     setFilters((prev) => ({
       ...prev,
@@ -20,9 +29,24 @@ export const useFilters = (initialFilters = {}) => {
     }));
   }, []);
 
+  const handleApplyFilters = useCallback((newFilters) => {
+    setFilters((prev) => ({
+      ...prev,
+      ...newFilters
+    }));
+
+    // Set filter active state based on whether any filters are applied
+    const hasActiveFilters = Object.values(newFilters).some(value => value && value !== '');
+    setIsFilterActive(hasActiveFilters);
+  }, []);
+
   const resetFilters = useCallback(() => {
     setSearchValue('');
-    setFilters(initialFilters);
+    setFilters({
+      community: '',
+      municipality: '',
+      ...initialFilters
+    });
     setIsFilterActive(false);
   }, [initialFilters]);
 
@@ -41,9 +65,12 @@ export const useFilters = (initialFilters = {}) => {
     searchValue,
     filters,
     isFilterActive,
+    isModalOpen,
     handleSearchChange,
     handleFilterToggle,
+    handleModalToggle,
     handleFilterChange,
+    handleApplyFilters,
     resetFilters,
     getActiveFilters
   };

@@ -12,12 +12,16 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
 
   const {
     searchValue,
+    filters,
     isFilterActive,
+    isModalOpen,
     handleSearchChange,
-    handleFilterToggle
+    handleModalToggle,
+    handleApplyFilters,
+    resetFilters
   } = useFilters({});
 
-  // Fetch data from API with pagination and search
+  // Fetch data from API with pagination, search, and filters
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -26,7 +30,9 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
       try {
         const result = await getInteresados({
           page: currentPage,
-          search: searchValue
+          search: searchValue,
+          community: filters.community,
+          municipality: filters.municipality
         });
 
         if (result.error) {
@@ -48,10 +54,20 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
     };
 
     fetchData();
-  }, [currentPage, searchValue]);
+  }, [currentPage, searchValue, filters.community, filters.municipality]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+
+  const handleApplyFiltersAndClose = (newFilters) => {
+    handleApplyFilters(newFilters);
+    setCurrentPage(1); // Reset to first page when filters change
+  };
+
+  const handleClearFilters = () => {
+    resetFilters();
+    setCurrentPage(1);
   };
 
   return (
@@ -66,7 +82,12 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
       searchValue={searchValue}
       onSearchChange={handleSearchChange}
       isFilterActive={isFilterActive}
-      onFilterClick={handleFilterToggle}
+      onFilterClick={handleModalToggle}
+      isModalOpen={isModalOpen}
+      onModalClose={handleModalToggle}
+      onApplyFilters={handleApplyFiltersAndClose}
+      onClearFilters={handleClearFilters}
+      currentFilters={filters}
       error={error}
     />
   );

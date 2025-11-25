@@ -21,7 +21,14 @@ export const SearchBar = ({
         onClick={onFilterClick}
         isActive={isFilterActive}
       />
-      <ExportButton/>
+      {
+        
+        /*
+        algun dia se usara esta exportacion
+             <ExportButton/>
+        */
+      }
+     
      </div>
      
     </div>

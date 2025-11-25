@@ -6,5 +6,7 @@ export { Pagination } from './Pagination';
 export { TableHeader } from './TableHeader';
 export { SearchBar } from './SearchBar';
 export { ProfileWidget } from './ProfileWidget';
+export { ComunitySelectors } from './comunitySelector';
+
 
  
