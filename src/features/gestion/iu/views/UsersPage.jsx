@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import { UsersManagementTemplate } from '../components/templates';
+import { SearchBar, Pagination } from '../components/molecules';
+import { UsersTable, ModalGestion } from '../components/organisms';
 import { useFilters } from '../hooks';
 import { getInteresados } from '../../services/gestionService';
 
-export const UsersPage = ({ onNavigate, onLogout }) => {
+export const UsersPage = () => {
   const [users, setUsers] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [totalResults, setTotalResults] = useState(0);
-  const [error, setError] = useState(null);
 
   const {
     searchValue,
@@ -25,7 +26,6 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      setError(null);
 
       try {
         const result = await getInteresados({
@@ -36,7 +36,6 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
         });
 
         if (result.error) {
-          setError(result.error);
           setUsers([]);
           setTotalResults(0);
         } else {
@@ -45,7 +44,6 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
         }
       } catch (err) {
         console.error('Error fetching users:', err);
-        setError('Error al cargar los interesados');
         setUsers([]);
         setTotalResults(0);
       } finally {
@@ -62,7 +60,7 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
 
   const handleApplyFiltersAndClose = (newFilters) => {
     handleApplyFilters(newFilters);
-    setCurrentPage(1); // Reset to first page when filters change
+    setCurrentPage(1);
   };
 
   const handleClearFilters = () => {
@@ -70,25 +68,52 @@ export const UsersPage = ({ onNavigate, onLogout }) => {
     setCurrentPage(1);
   };
 
+  const handleSelectUser = (userId) => {
+    setSelectedUsers((prev) =>
+      prev.includes(userId) ? prev.filter((id) => id !== userId) : [...prev, userId]
+    );
+  };
+
+  const resultsPerPage = 7;
+  const totalPages = Math.ceil(totalResults / resultsPerPage);
+
   return (
-    <UsersManagementTemplate
-      users={users}
-      onNavigate={onNavigate}
-      onLogout={onLogout}
-      isLoading={isLoading}
-      totalResults={totalResults}
-      currentPage={currentPage}
-      onPageChange={handlePageChange}
-      searchValue={searchValue}
-      onSearchChange={handleSearchChange}
-      isFilterActive={isFilterActive}
-      onFilterClick={handleModalToggle}
-      isModalOpen={isModalOpen}
-      onModalClose={handleModalToggle}
-      onApplyFilters={handleApplyFiltersAndClose}
-      onClearFilters={handleClearFilters}
-      currentFilters={filters}
-      error={error}
-    />
+    <>
+      {/* Search Bar */}
+      <SearchBar
+        searchValue={searchValue}
+        onSearchChange={handleSearchChange}
+        onFilterClick={handleModalToggle}
+        isFilterActive={isFilterActive}
+      />
+
+      {/* Users Table */}
+      <UsersTable
+        users={users}
+        selectedUsers={selectedUsers}
+        onSelectUser={handleSelectUser}
+        isLoading={isLoading}
+      />
+
+      {/* Pagination */}
+      <div className="mt-6">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalResults={totalResults}
+          resultsPerPage={resultsPerPage}
+          onPageChange={handlePageChange}
+        />
+      </div>
+
+      {/* Filter Modal */}
+      <ModalGestion
+        isOpen={isModalOpen}
+        onClose={handleModalToggle}
+        onApplyFilters={handleApplyFiltersAndClose}
+        onClearFilters={handleClearFilters}
+        initialFilters={filters}
+      />
+    </>
   );
 };

@@ -1,4 +1,5 @@
 export { Breadcrumbs } from './breadcrumbs';
+export { CardDash } from './cardDashboard';
 export { UserCard } from './UserCard';
 export { FooterSideBar } from './footerSideBar';
 export { HeaderSideBar } from './headerSidebar';
@@ -7,6 +8,7 @@ export { TableHeader } from './TableHeader';
 export { SearchBar } from './SearchBar';
 export { ProfileWidget } from './ProfileWidget';
 export { ComunitySelectors } from './comunitySelector';
+
 
 
  

@@ -37,7 +37,7 @@ export const UsersTable = ({
   return (
     <div className={`bg-white rounded-lg border border-gray-200 overflow-hidden ${className}`}>
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full border-collapse">
           <TableHeader headers={headers}/>
           <tbody>
             {users.map((user) => (

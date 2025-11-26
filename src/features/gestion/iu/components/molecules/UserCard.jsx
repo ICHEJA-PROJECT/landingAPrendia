@@ -1,5 +1,5 @@
-import { Avatar, Badge } from '../atoms';
-import { EyeIcon, CheckIcon } from '@heroicons/react/24/solid';
+import { Badge } from '../atoms';
+import { CheckIcon } from '@heroicons/react/24/solid';
 
 export const UserCard = ({ user, onView, onSelect, isSelected }) => {
   return (
@@ -8,12 +8,9 @@ export const UserCard = ({ user, onView, onSelect, isSelected }) => {
         <span className="text-sm font-medium text-gray-900">{user.id}</span>
       </td>
       <td className="px-6 py-4">
-        <div className="flex items-center gap-3">
-          <Avatar src={user.avatar} alt={user.name} size="md" />
-          <div>
-            <p className="font-medium text-gray-900">{user.name}</p>
-            <p className="text-sm text-gray-500">{user.lastName}</p>
-          </div>
+        <div className="flex flex-col">
+          <p className="font-medium text-gray-900">{user.name}</p>
+          <p className="text-sm text-gray-500">{user.lastName}</p>
         </div>
       </td>
       <td className="px-6 py-4">
@@ -29,7 +26,7 @@ export const UserCard = ({ user, onView, onSelect, isSelected }) => {
         <Badge variant="primary">{user.community}</Badge>
       </td>
       <td className="px-6 py-4">
-        <EyeIcon className="h-5 w-5 text-gray-400 cursor-pointer hover:text-gray-700" />
+        <span className="text-sm text-gray-600 line-clamp-1">{user.interest}</span>
       </td>
       <td className="px-6 py-4">
         <span className="text-sm text-gray-600">{user.registrationDate}</span>
