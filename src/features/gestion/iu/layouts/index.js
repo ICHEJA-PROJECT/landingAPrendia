@@ -1,0 +1,1 @@
+export { GestionLayout } from './GestionLayout';

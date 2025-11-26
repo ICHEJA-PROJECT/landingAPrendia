@@ -39,18 +39,18 @@ const FormLogin = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-[#FFFFFF] border-1 border-[#E5E7EB] rounded-xl py-10 px-11 w-full ml-10">
+    <form onSubmit={handleSubmit} className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl py-8 sm:py-10 px-6 sm:px-11 w-full">
       <TitleLogin/>
       <InputsForm formData={formData} onInputChange={handleInputChange} />
       <ForgotPassword/>
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 mt-4">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 mt-4 text-sm">
           {error}
         </div>
       )}
       <PrimaryButton
         text={loading ? "Iniciando..." : "Iniciar Sesión"}
-        className={"w-full py-1 text-sm"}
+        className={"w-full py-2 sm:py-3 text-sm"}
         disabled={loading}
         type="submit"
       />
