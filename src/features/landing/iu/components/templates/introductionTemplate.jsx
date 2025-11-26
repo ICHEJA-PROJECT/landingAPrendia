@@ -48,8 +48,8 @@ const IntroductionTemplate = () => {
                     {/* TITLE */}
                     <motion.div
                         ref={refTitle}
-                        initial={{ opacity: 0, scale: 0.9, y: -20, filter: "blur(4px)" }}
-                        animate={isTitleInView ? { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, scale: 0.9, y: -20, filter: "blur(4px)" }}
+                        initial={{ opacity: 0, scale: 0.9, y: -20 }}
+                        animate={isTitleInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: -20 }}
                         transition={{ ...springGentle, delay: 0.1 }}
                         className="w-full text-center"
                     >
@@ -59,8 +59,8 @@ const IntroductionTemplate = () => {
                     {/* PARAGRAPH */}
                     <motion.p
                         ref={refText}
-                        initial={{ opacity: 0, y: 20, filter: "blur(3px)" }}
-                        animate={isTextInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 20, filter: "blur(3px)" }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isTextInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ ...springGentle, delay: 0.2 }}
                         className="
                             text-base sm:text-lg md:text-2xl lg:text-4xl
@@ -92,8 +92,8 @@ const IntroductionTemplate = () => {
                 <motion.div
                     ref={refImage}
                     className="w-full sm:w-[45%] md:w-[45%] lg:w-[40%] flex justify-center items-center"
-                    initial={{ opacity: 0, x: 40, scale: 0.9, filter: "blur(4px)" }}
-                    animate={isImageInView ? { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" } : { opacity: 0, x: 40, scale: 0.9, filter: "blur(4px)" }}
+                    initial={{ opacity: 0, x: 40, scale: 0.9 }}
+                    animate={isImageInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: 40, scale: 0.9 }}
                     transition={{ ...springGentle, delay: 0.25 }}
                 >
                     <motion.img

@@ -23,8 +23,8 @@ const InterestTemplate = () => {
                 </motion.h2>
                 <motion.p
                     ref={refText}
-                    initial={{ opacity: 0, y: 15, filter: "blur(3px)" }}
-                    animate={isTextInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 15, filter: "blur(3px)" }}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={isTextInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
                     transition={{ ...springGentle, delay: 0.18 }}
                     className="text-sm sm:text-base md:text-xl lg:text-2xl w-full text-center mt-4 px-2"
                 >

@@ -38,8 +38,8 @@ const WhatIaTemplate = () => {
                     className="flex flex-col-reverse sm:flex-row items-center gap-1 sm:gap-x-6 md:gap-x-16 lg:gap-x-20"
                 >
                     <motion.p
-                        initial={{ opacity: 0, x: -25, filter: "blur(3px)" }}
-                        animate={isContentInView ? { opacity: 1, x: 0, filter: "blur(0px)" } : { opacity: 0, x: -25, filter: "blur(3px)" }}
+                        initial={{ opacity: 0, x: -25 }}
+                        animate={isContentInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -25 }}
                         transition={{ ...springGentle, delay: 0.25 }}
                         className="text-base sm:text-lg md:text-2xl lg:text-3xl text-justify leading-relaxed"
                     >
@@ -48,8 +48,8 @@ const WhatIaTemplate = () => {
 
                     <motion.div
                         className="shrink-0 relative"
-                        initial={{ opacity: 0, x: 25, rotate: 8, filter: "blur(4px)" }}
-                        animate={isContentInView ? { opacity: 1, x: 0, rotate: 0, filter: "blur(0px)" } : { opacity: 0, x: 25, rotate: 8, filter: "blur(4px)" }}
+                        initial={{ opacity: 0, x: 25, rotate: 8 }}
+                        animate={isContentInView ? { opacity: 1, x: 0, rotate: 0 } : { opacity: 0, x: 25, rotate: 8 }}
                         transition={{ ...springGentle, delay: 0.3 }}
                     >
                         <motion.div

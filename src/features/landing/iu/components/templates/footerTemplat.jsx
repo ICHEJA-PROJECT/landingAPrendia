@@ -1,4 +1,4 @@
-import up from "/img/UP.png"
+
 import footerLanding from "/img/foot_landing.png"
 const Footer = () => {
     return (

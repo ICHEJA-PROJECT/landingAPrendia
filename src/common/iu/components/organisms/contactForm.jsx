@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Input, Select } from "../index"
 import TextArea from "../atoms/textarea"
+import Toast from "../atoms/Toast"
 import { getMunicipalitiesByState } from "../../../../features/landing/services/municipalityService"
 import { sendFormData } from "../../../../features/landing/services/serviceForm"
 
@@ -20,7 +21,7 @@ const ContactForm = () => {
   const [municipios, setMunicipios] = useState([])
   const [loadingMunicipios, setLoadingMunicipios] = useState(true)
   const [submitting, setSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
+  const [toast, setToast] = useState(null)
 
   useEffect(() => {
     const fetchMunicipios = async () => {
@@ -44,11 +45,11 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setSubmitting(true)
-    setSubmitStatus(null)
+    setToast(null)
 
     // Validar que al menos email o teléfono esté lleno
     if (!formData.email && !formData.telefono) {
-      setSubmitStatus({
+      setToast({
         type: 'error',
         message: 'Debe proporcionar al menos un email o número de teléfono para contactarlo.'
       })
@@ -59,7 +60,7 @@ const ContactForm = () => {
     const result = await sendFormData(formData)
 
     if (result.success) {
-      setSubmitStatus({ type: 'success', message: 'Formulario enviado correctamente' })
+      setToast({ type: 'success', message: 'Formulario enviado correctamente' })
       setFormData({
         comunidad: "",
         otraComunidad: "",
@@ -71,11 +72,8 @@ const ContactForm = () => {
         estado: "Chiapas",
         motivo: ""
       })
-      setTimeout(() => {
-        setSubmitStatus(null)
-      }, 3000)
     } else {
-      setSubmitStatus({ type: 'error', message: 'Error al enviar el formulario. Intente nuevamente.' })
+      setToast({ type: 'error', message: result.error || 'Error al enviar el formulario. Intente nuevamente.' })
     }
 
     setSubmitting(false)
@@ -189,26 +187,23 @@ const ContactForm = () => {
             />
           </div>
 
-          {submitStatus && (
-            <div className={`col-span-1 md:col-span-2 p-3 rounded-lg text-center ${
-              submitStatus.type === 'success'
-                ? 'bg-green-100 text-green-800'
-                : 'bg-red-100 text-red-800'
-            }`}>
-              {submitStatus.message}
-            </div>
+          {toast && (
+            <Toast
+              type={toast.type}
+              message={toast.message}
+              onClose={() => setToast(null)}
+            />
           )}
 
           <div className="col-span-1 md:col-span-2 flex justify-center md:justify-end">
             <button
               type="submit"
               disabled={submitting}
-              className={`bg-pink-ia text-white px-8 md:px-10 py-3 rounded-lg text-lg md:text-xl font-bold transition-all duration-200 ease-in-out hover:bg-opacity-90 hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-md flex items-center gap-3 w-full md:w-auto justify-center ${
-                submitting ? 'opacity-70 cursor-not-allowed' : ''
-              }`}
+              className={`bg-pink-ia text-white px-8 md:px-10 py-3 rounded-lg text-lg md:text-xl font-bold transition-all duration-200 ease-in-out hover:bg-opacity-90 hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-md flex items-center gap-3 w-full md:w-auto justify-center ${submitting ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
             >
               {submitting ? 'Enviando...' : 'Registrarme'}
-           
+
             </button>
           </div>
 

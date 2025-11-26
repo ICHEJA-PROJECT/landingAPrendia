@@ -1,13 +1,4 @@
-/**
- * Get API URL based on environment
- */
-const getApiUrl = (endpoint) => {
-  // Use proxy during development, direct URL for production
-  if (import.meta.env.MODE === 'development') {
-    return `/api/form${endpoint}`;
-  }
-  return `${import.meta.env.VITE_API_SERVICES_FORM}${endpoint}`;
-};
+import { apiClient } from '../../../core/api/apiClient';
 
 export const sendFormData = async (formData) => {
   try {
@@ -31,30 +22,11 @@ export const sendFormData = async (formData) => {
       porQueMeInteresa: formData.motivo
     }
 
-    const url = getApiUrl('/forms');
+    // apiClient handles base URL, headers, and error formatting
+    const data = await apiClient.post('/form/forms', payload);
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-
-    const responseText = await response.text();
-
-    if (!response.ok) {
-      throw new Error('Error al enviar formulario')
-    }
-
-    try {
-      const data = JSON.parse(responseText);
-      return { success: true, data }
-    } catch {
-      throw new Error('Respuesta inválida del servidor');
-    }
+    return { success: true, data };
   } catch (error) {
-    console.error('Error en sendFormData:', error)
     return { success: false, error: error.message }
   }
 }

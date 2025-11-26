@@ -19,9 +19,8 @@ const FeatureCard = ({ feature, index, cardVariants, imageVariants, titleVariant
             initial="hidden"
             animate={isCardInView ? "visible" : "hidden"}
             whileHover="hover"
-            className={`flex flex-col-reverse sm:flex-row items-center gap-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-16 w-full mb-10 sm:mb-14 md:mb-16 lg:mb-20 cursor-pointer ${
-                feature.alignment === "texto-imagen" ? "sm:flex-row-reverse" : ""
-            }`}
+            className={`flex flex-col-reverse sm:flex-row items-center gap-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-16 w-full mb-10 sm:mb-14 md:mb-16 lg:mb-20 cursor-pointer ${feature.alignment === "texto-imagen" ? "sm:flex-row-reverse" : ""
+                }`}
         >
             <motion.div
                 className="shrink-0 relative"
@@ -86,13 +85,11 @@ const FeatureTemplate = () => {
             opacity: 0,
             scale: 0.9,
             y: 30,
-            filter: "blur(4px)",
         },
         visible: (i) => ({
             opacity: 1,
             scale: 1,
             y: 0,
-            filter: "blur(0px)",
             transition: {
                 ...springGentle,
                 delay: 0.2 + i * 0.15,
@@ -106,13 +103,12 @@ const FeatureTemplate = () => {
     }
 
     const imageVariants = {
-        hidden: { opacity: 0, scale: 0.85, rotate: -10, y: 20, filter: "blur(4px)" },
+        hidden: { opacity: 0, scale: 0.85, rotate: -10, y: 20 },
         visible: (i) => ({
             opacity: 1,
             scale: 1,
             rotate: 0,
             y: 0,
-            filter: "blur(0px)",
             transition: { ...springGentle, delay: 0.3 + i * 0.15, duration: 0.6 },
         }),
         hover: {
@@ -123,23 +119,21 @@ const FeatureTemplate = () => {
     }
 
     const textVariants = {
-        hidden: { opacity: 0, x: -30, y: 15, filter: "blur(3px)" },
+        hidden: { opacity: 0, x: -30, y: 15 },
         visible: (i) => ({
             opacity: 1,
             x: 0,
             y: 0,
-            filter: "blur(0px)",
             transition: { ...springGentle, delay: 0.25 + i * 0.15 },
         }),
     }
 
     const titleVariants = {
-        hidden: { opacity: 0, x: -30, y: 15, filter: "blur(3px)" },
+        hidden: { opacity: 0, x: -30, y: 15 },
         visible: (i) => ({
             opacity: 1,
             x: 0,
             y: 0,
-            filter: "blur(0px)",
             transition: { ...springGentle, delay: 0.3 + i * 0.15 },
         }),
         hover: {
@@ -150,12 +144,11 @@ const FeatureTemplate = () => {
     }
 
     const paragraphVariants = {
-        hidden: { opacity: 0, x: -30, y: 15, filter: "blur(3px)" },
+        hidden: { opacity: 0, x: -30, y: 15 },
         visible: (i) => ({
             opacity: 1,
             x: 0,
             y: 0,
-            filter: "blur(0px)",
             transition: { ...springGentle, delay: 0.35 + i * 0.15 },
         }),
     }
