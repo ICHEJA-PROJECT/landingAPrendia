@@ -1,15 +1,24 @@
-import { apiClient } from '../../../core/api/apiClient';
-
 /**
  * Login with username and password
  */
 export const loginUser = async (username, password) => {
   try {
-    // apiClient handles base URL, headers, and error formatting
-    const data = await apiClient.post('/form/auth/login', {
-      username,
-      password
+    const url = `${import.meta.env.VITE_API_SERVICES_FORM}/auth/login`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error al iniciar sesión');
+    }
+
+    const data = await response.json();
 
     // Store token in localStorage
     if (data.access_token || data.token) {

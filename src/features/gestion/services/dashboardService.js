@@ -1,17 +1,6 @@
-/**
- * Get API URL based on environment
- */
-const getApiUrl = (endpoint) => {
-  // Use proxy during development, direct URL for production
-  if (import.meta.env.MODE === 'development') {
-    return `/api/form${endpoint}`;
-  }
-  return `${import.meta.env.VITE_API_SERVICES_FORM}${endpoint}`;
-};
-
 export const getStats = async () => {
   try {
-    const url = getApiUrl('/forms/stats');
+    const url = `${import.meta.env.VITE_API_SERVICES_FORM}/forms/stats`;
     const token = localStorage.getItem('token');
 
     const response = await fetch(url, {
@@ -49,7 +38,7 @@ export const getStats = async () => {
 
 export const getTopMunicipalities = async () => {
   try {
-    const url = getApiUrl('/forms/top-municipalities');
+    const url = `${import.meta.env.VITE_API_SERVICES_FORM}/forms/top-municipalities`;
     const token = localStorage.getItem('token');
 
     const response = await fetch(url, {

@@ -1,14 +1,3 @@
-/**
- * Get API URL based on environment
- */
-const getApiUrl = (endpoint) => {
-  // Use proxy during development, direct URL for production
-  if (import.meta.env.MODE === 'development') {
-    return `/api/form${endpoint}`;
-  }
-  return `${import.meta.env.VITE_API_SERVICES_FORM}${endpoint}`;
-};
-
 export const getInteresados = async (params = {}) => {
   const { page = 1, search = '', community = '', municipality = '' } = params;
 
@@ -16,7 +5,9 @@ export const getInteresados = async (params = {}) => {
     const token = localStorage.getItem('token');
 
     // Fetch from forms endpoint (this endpoint returns all forms)
-    const response = await fetch(getApiUrl('/forms'), {
+    const formsUrl = `${import.meta.env.VITE_API_SERVICES_FORM}/forms`;
+
+    const response = await fetch(formsUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -88,7 +79,7 @@ export const getInteresados = async (params = {}) => {
     }
 
     // Simple pagination
-    const limit = 7;
+    const limit = 10;
     const startIndex = (page - 1) * limit;
     const paginatedData = filtered.slice(startIndex, startIndex + limit);
 
@@ -106,7 +97,7 @@ export const getInteresados = async (params = {}) => {
       data: [],
       total: 0,
       page: 1,
-      limit: 7,
+      limit: 10,
       totalPages: 0,
       error: error.message
     };
@@ -120,7 +111,9 @@ export const getInteresadoById = async (id) => {
   try {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(getApiUrl(`/forms/${id}`), {
+    const url = `${import.meta.env.VITE_API_SERVICES_FORM}/forms/${id}`;
+
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -150,5 +143,57 @@ export const getInteresadoById = async (id) => {
   } catch (error) {
     console.error('Error fetching interesado:', error);
     throw error;
+  }
+};
+
+/**
+ * Update the attended status of a form
+ */
+export const updateAttendedStatus = async (formId, atendido) => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación');
+    }
+
+    const url = `${import.meta.env.VITE_API_SERVICES_FORM}/forms/${formId}/atendido`;
+
+    console.log('Updating attended status:', { url, formId, atendido });
+
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ atendido })
+    });
+
+    if (!response.ok) {
+      let errorMessage = `Error ${response.status}: ${response.statusText}`;
+
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || errorData.error || errorMessage;
+      } catch (e) {
+        // If response is not JSON, use the status text
+        console.error('Error parsing error response:', e);
+      }
+
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    return {
+      success: true,
+      data
+    };
+  } catch (error) {
+    console.error('Error updating attended status:', error);
+    return {
+      success: false,
+      error: error.message || 'Error desconocido al actualizar el estado'
+    };
   }
 };

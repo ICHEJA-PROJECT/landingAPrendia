@@ -1,10 +1,6 @@
 export const getMunicipalitiesByState = async (stateId) => {
   try {
-    const baseUrl = import.meta.env.MODE === 'development'
-      ? '/api'  // Use proxy in development
-      : import.meta.env.VITE_API_CORE
-
-    const apiUrl = `${baseUrl}/municipalities/state/${stateId}`
+    const apiUrl = `${import.meta.env.VITE_API_CORE}/api/municipalities/state/${stateId}`
 
     const response = await fetch(apiUrl)
 
